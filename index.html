@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sneaker Drop</title>
+
+  <!-- Telegram Web App API -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <h1>Sneaker Drop</h1>
+    <p class="subtitle">Лимитированные кроссовки. Оригинал.</p>
+
+    <div class="buttons">
+      <button onclick="showSection('catalog')">Каталог</button>
+      <button onclick="showSection('how')">Как купить</button>
+      <button onclick="showSection('form')">Оставить заявку</button>
+    </div>
+
+    <!-- Каталог -->
+    <div id="catalog" class="section hidden">
+      <h2>Каталог</h2>
+
+      <div class="card">
+        <img src="https://i.imgur.com/5b6pJjK.png" />
+        <h3>Nike Dunk Low</h3>
+        <button onclick="selectModel('Nike Dunk Low')">Хочу купить</button>
+      </div>
+
+      <div class="card">
+        <img src="https://i.imgur.com/2nCt3Sbl.png" />
+        <h3>Air Jordan 1</h3>
+        <button onclick="selectModel('Air Jordan 1')">Хочу купить</button>
+      </div>
+
+      <div class="card">
+        <img src="https://i.imgur.com/8JvQH7h.png" />
+        <h3>Yeezy Boost 350</h3>
+        <button onclick="selectModel('Yeezy Boost 350')">Хочу купить</button>
+      </div>
+    </div>
+
+    <!-- Как купить -->
+    <div id="how" class="section hidden">
+      <h2>Как купить</h2>
+      <ol>
+        <li>Выберите модель</li>
+        <li>Оставьте заявку</li>
+        <li>Менеджер свяжется с вами</li>
+      </ol>
+    </div>
+
+    <!-- Форма -->
+    <div id="form" class="section hidden">
+      <h2>Заявка</h2>
+
+      <input id="name" placeholder="Ваше имя" />
+      <input id="contact" placeholder="Telegram или телефон" />
+      <input id="model" placeholder="Модель" readonly />
+
+      <button onclick="sendForm()">Отправить заявку</button>
+      <p id="status"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
