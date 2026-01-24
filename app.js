@@ -1,7 +1,8 @@
 console.log("APP_VERSION_1");
 alert("APP_VERSION_1");
 
-const tg = window.Telegram.WebApp;
+const tg = window.Telegram?.WebApp;
+tg.ready();
 tg.expand();
 
 function showSection(id) {
@@ -32,7 +33,16 @@ function sendForm() {
     model
   };
 
-  tg.sendData(JSON.stringify(data));
+  const payload = JSON.stringify(data);
+
+tg.MainButton.setText("Подтвердить отправку");
+tg.MainButton.show();
+
+tg.MainButton.onClick(() => {
+  tg.sendData(payload);
+});
+
+  
   document.getElementById("status").innerText = "sendData вызван ✅";
 
 }
