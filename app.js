@@ -12,6 +12,8 @@ function selectModel(name) {
 }
 
 function sendForm() {
+    document.getElementById("status").innerText = "Нажал отправить…";
+
   const name = document.getElementById("name").value;
   const contact = document.getElementById("contact").value;
   const model = document.getElementById("model").value;
@@ -28,5 +30,6 @@ function sendForm() {
   };
 
   tg.sendData(JSON.stringify(data));
-  document.getElementById("status").innerText = "Заявка отправлена ✅";
+  document.getElementById("status").innerText = "sendData вызван ✅";
+  tg.close();
 }
