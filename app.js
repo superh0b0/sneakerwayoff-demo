@@ -31,7 +31,5 @@ function sendForm() {
 
   tg.sendData(JSON.stringify(data));
   document.getElementById("status").innerText = "sendData вызван ✅";
-  setTimeout(() => {
-  tg.close();
-}, 600);
+
 }
