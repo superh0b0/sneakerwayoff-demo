@@ -2,6 +2,31 @@ console.log("APP_VERSION_1");
 alert("APP_VERSION_1");
 
 const tg = window.Telegram?.WebApp;
+
+let pendingPayload = null;
+
+function setStatus(t) {
+  const el = document.getElementById("status");
+  if (el) el.innerText = t;
+}
+
+if (!tg) {
+  alert("Telegram WebApp не найден. Открой через кнопку /app.");
+} else {
+  tg.ready();
+  tg.expand();
+
+  // Вешаем обработчик ОДИН РАЗ
+  tg.onEvent("mainButtonClicked", () => {
+    if (!pendingPayload) {
+      setStatus("Нет данных для отправки");
+      return;
+    }
+    setStatus("Клик по MainButton ✅ отправляю…");
+    tg.sendData(pendingPayload);
+  });
+}
+
 tg.ready();
 tg.expand();
 
@@ -16,27 +41,27 @@ function selectModel(name) {
 }
 
 function sendForm() {
-    document.getElementById("status").innerText = "Нажал отправить…";
-
-  const name = document.getElementById("name").value;
-  const contact = document.getElementById("contact").value;
-  const model = document.getElementById("model").value;
+  const name = document.getElementById("name").value.trim();
+  const contact = document.getElementById("contact").value.trim();
+  const model = document.getElementById("model").value.trim();
 
   if (!name || !contact || !model) {
-    document.getElementById("status").innerText = "Заполните все поля";
+    setStatus("Заполните все поля");
     return;
   }
 
-  const data = {
-    name,
-    contact,
-    model
-  };
+  if (!tg) {
+    setStatus("Открой Mini App через /app в Telegram");
+    return;
+  }
 
-  const payload = JSON.stringify(data);
+  pendingPayload = JSON.stringify({ name, contact, model });
 
-tg.MainButton.setText("Подтвердить отправку");
-tg.MainButton.show();
+  setStatus("Нажми большую кнопку Telegram внизу 👇");
+  tg.MainButton.setText("Подтвердить отправку");
+  tg.MainButton.enable();
+  tg.MainButton.show();
+}
 
 tg.MainButton.onClick(() => {
   tg.sendData(payload);
@@ -45,4 +70,4 @@ tg.MainButton.onClick(() => {
   
   document.getElementById("status").innerText = "sendData вызван ✅";
 
-}
+
