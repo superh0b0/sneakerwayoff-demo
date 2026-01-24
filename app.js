@@ -1,3 +1,6 @@
+console.log("APP_VERSION_1");
+alert("APP_VERSION_1");
+
 const tg = window.Telegram.WebApp;
 tg.expand();
 
