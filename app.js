@@ -21,7 +21,7 @@ function setStatus(text) {
   if (el) el.innerText = text;
 }
 
-function showSection(id) {
+function _showSection(id) {
   document.querySelectorAll(".section").forEach((s) => s.classList.add("hidden"));
   const el = $(id);
   if (el) el.classList.remove("hidden");
@@ -213,7 +213,7 @@ function renderCatalog(sectionKey) {
 // ====== 7) Navigation (HTML calls) ======
 window.openCatalog = async function (sectionKey) {
   activeSection = sectionKey === "sale" ? "sale" : "new";
-  showSection("catalog");
+  _showSection("catalog");
 
   const list = $("catalogList");
   if (list) list.innerHTML = `<p style="opacity:.8">Загружаю каталог…</p>`;
@@ -227,14 +227,10 @@ window.openCatalog = async function (sectionKey) {
   }
 };
 
-window.showSection = function (id) {
-  showSection(id);
-};
-
 // ====== 8) Select -> form ======
 function selectItem(item) {
   selectedItem = item;
-  showSection("form");
+  _showSection("form");
   $("model").value = item?.name || "";
   setStatus("");
 }
