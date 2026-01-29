@@ -16,33 +16,16 @@
     <p class="subtitle">Лимитированные кроссовки. Оригинал.</p>
 
     <div class="buttons">
-      <button onclick="showSection('catalog')">Каталог</button>
-      <button onclick="showSection('how')">Как купить</button>
-      <button onclick="showSection('form')">Оставить заявку</button>
+      <button onclick="openCatalog('new')">Новинки</button>
+      <button onclick="openCatalog('sale')">Акции</button>
     </div>
 
     <!-- Каталог -->
     <div id="catalog" class="section hidden">
-      <h2>Каталог</h2>
-
-      <div class="card">
-        <img src="https://i.imgur.com/5b6pJjK.png" />
-        <h3>Nike Dunk Low</h3>
-        <button onclick="selectModel('Nike Dunk Low')">Хочу купить</button>
+      <h2 id="catalogTitle">Каталог</h2>
+      <div id="catalogList"></div>
       </div>
-
-      <div class="card">
-        <img src="https://i.imgur.com/2nCt3Sbl.png" />
-        <h3>Air Jordan 1</h3>
-        <button onclick="selectModel('Air Jordan 1')">Хочу купить</button>
-      </div>
-
-      <div class="card">
-        <img src="https://i.imgur.com/8JvQH7h.png" />
-        <h3>Yeezy Boost 350</h3>
-        <button onclick="selectModel('Yeezy Boost 350')">Хочу купить</button>
-      </div>
-    </div>
+    
 
     <!-- Как купить -->
     <div id="how" class="section hidden">
