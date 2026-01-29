@@ -22,6 +22,16 @@ h1 {
   margin: 6px 0;
   padding: 12px;
   font-size: 16px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 .section {
@@ -33,7 +43,7 @@ h1 {
 }
 
 .card {
-  background: #1c1c1c;
+  background: #22c55e;
   padding: 12px;
   margin-bottom: 12px;
   border-radius: 8px;
@@ -54,9 +64,38 @@ input {
   width: 100%;
   padding: 10px;
   margin-bottom: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+input[readonly] {
+  background: #2a2a2a;
+  opacity: 0.8;
 }
 
 #status {
   margin-top: 10px;
   color: #7CFC00;
+}
+
+.card h3 {
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+.card div {
+  font-size: 15px;
+}
+
+.card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+
+#status.error {
+  color: #ff4d4d;
 }

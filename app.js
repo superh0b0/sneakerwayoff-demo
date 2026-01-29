@@ -243,6 +243,8 @@ window.selectModel = function (nameOrItem) {
   }
 };
 
+
+
 // ====== 9) Send form ======
 window.sendForm = function () {
   const name = ($("name")?.value || "").trim();
@@ -282,4 +284,6 @@ window.sendForm = function () {
     setStatus("❌ Ошибка отправки");
     lockSend(false);
   }
+  
+  el.className = isError ? "error" : "";
 };
