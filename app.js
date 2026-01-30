@@ -110,10 +110,16 @@ async function fetchSheet(url) {
   return res.text();
 }
 
+const CACHE_KEY = "catalog_cache_v1";
+
 async function loadCatalog() {
   if (loaded) return;
-  if (!NEW_CSV_URL.includes("http") || !SALE_CSV_URL.includes("http")) {
-    throw new Error("CSV URLs are not set");
+
+  const cached = sessionStorage.getItem(CACHE_KEY);
+  if (cached) {
+    CATALOG = JSON.parse(cached);
+    loaded = true;
+    return;
   }
 
   const [newCsv, saleCsv] = await Promise.all([
@@ -124,6 +130,7 @@ async function loadCatalog() {
   const newItems = csvToObjects(newCsv)
     .map((it) => ({
       section: "new",
+      id: it.id || "",          // (см. пункт 3)
       name: it.name || "",
       img: it.img || "",
       price: normalizePrice(it.price),
@@ -134,6 +141,7 @@ async function loadCatalog() {
   const saleItems = csvToObjects(saleCsv)
     .map((it) => ({
       section: "sale",
+      id: it.id || "",
       name: it.name || "",
       img: it.img || "",
       price: normalizePrice(it.price),
@@ -142,6 +150,7 @@ async function loadCatalog() {
     .filter((x) => x.name);
 
   CATALOG = { new: newItems, sale: saleItems };
+  sessionStorage.setItem(CACHE_KEY, JSON.stringify(CATALOG));
   loaded = true;
 }
 
@@ -170,8 +179,12 @@ function renderCatalog(sectionKey) {
       img.src = p.img;
       img.alt = p.name;
       img.loading = "lazy";
+      img.onerror = () => {
+        img.src = "placeholder.png"; // положи рядом в репо
+         };
       card.appendChild(img);
     }
+
 
     const h3 = document.createElement("h3");
     h3.innerText = p.name;
@@ -252,11 +265,17 @@ window.sendForm = function () {
   const model = ($("model")?.value || "").trim();
 
   if (!name || !contact || !model) {
-    setStatus("Заполните все поля");
-    return;
+  setStatus("Заполните все поля");
+  return;
   }
 
+  if (!/^\+?\d{7,15}$/.test(contact) && !contact.includes("@") && !contact.startsWith("@")) {
+    setStatus("Введите телефон, @username или email");
+    return;
+  };
+
   const payload = {
+    id: selectedItem?.id || "",
     name,
     contact,
     model,
@@ -284,6 +303,5 @@ window.sendForm = function () {
     setStatus("❌ Ошибка отправки");
     lockSend(false);
   }
-  
-  el.className = isError ? "error" : "";
 };
+
