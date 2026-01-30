@@ -1,8 +1,8 @@
 "use strict";
 
 // ====== 1) Вставь две ссылки CSV (New и Sale) ======
-const NEW_CSV_URL  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2i6_k2D5L8U-AQCbv98LQTbYF06te0i1Oq-PDqcAD3uzdxNv2XZM1CFgpVPiqDj4tapscefaG7D30/pub?gid=0&single=true&output=csv";
-const SALE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2i6_k2D5L8U-AQCbv98LQTbYF06te0i1Oq-PDqcAD3uzdxNv2XZM1CFgpVPiqDj4tapscefaG7D30/pub?gid=2060716939&single=true&output=csv";
+const NEW_CSV_URL  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRP7-bpyhXa-yo5Lo2kbLGNCxJts_nTxyPC0wJxWesHdCMevVmv_6zL1PFnrHBFCt8saMe00lZ9ho5/pub?gid=0&single=true&output=csv";
+const SALE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRP7-bpyhXa-yo5Lo2kbLGNCxJts_nTxyPC0wJxWesHdCMevVmv_6zL1PFnrHBFCt8saMe00lZ9ho5/pub?gid=51923143&single=true&output=csv";
 
 // ====== 2) Telegram WebApp init ======
 const tg = window.Telegram?.WebApp || null;
