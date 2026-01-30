@@ -110,7 +110,7 @@ async function fetchSheet(url) {
   return res.text();
 }
 
-const CACHE_KEY = "catalog_cache_v1";
+const CACHE_KEY = "catalog_cache_v2";
 
 async function loadCatalog() {
   if (loaded) return;
